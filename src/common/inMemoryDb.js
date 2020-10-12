@@ -98,3 +98,17 @@ db.getEntityById = async (tableName, id, keyNumber) => {
     keyNumber !== undefined ? db[tableName][keyNumber] : db[tableName];
   return table.filter(item => id === item.id)[0];
 };
+
+// DELETE ENTITY
+db.deleteEntity = async (tableName, id, keyNumber) => {
+  const checkEntity = await db.getEntityById(tableName, id, keyNumber);
+  if (checkEntity) {
+    const table =
+      keyNumber !== undefined ? db[tableName][keyNumber] : db[tableName];
+    table.splice(table.indexOf(checkEntity), 1);
+    return true;
+  }
+  return false;
+};
+
+module.exports = db;
