@@ -1,6 +1,6 @@
 const db = require('../../common/inMemoryDb');
 const Task = require('./task.model');
-const NotFoundError = require('../../utils/errors');
+const NotFoundError = require('../../utils/errorClasses');
 
 const TABLE = 'tasks';
 const ENTITY = 'task';

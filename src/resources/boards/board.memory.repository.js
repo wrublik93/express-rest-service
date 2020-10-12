@@ -1,5 +1,5 @@
 const db = require('../../common/inMemoryDb');
-const NotFoundError = require('../../utils/errors');
+const NotFoundError = require('../../utils/errorClasses');
 
 const TABLE = 'boards';
 const ENTITY = 'board';
