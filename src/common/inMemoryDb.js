@@ -1,6 +1,6 @@
 const Board = require('../resources/boards/board.model');
 const Task = require('../resources/tasks/task.model');
-const User = require('../resources/boards/board.model');
+const User = require('../resources/users/user.model');
 
 const db = {
   tasks: {},
@@ -126,11 +126,11 @@ db.createEntity = async (tableName, entity, keyNumber) => {
 
 // UPDATE ENTITY
 db.updateEntity = async (tableName, id, entity, keyNumber) => {
-  const getEntity = await db.getEntityById(tableName, id, keyNumber);
-  if (getEntity) {
+  const oldEntity = await db.getEntityById(tableName, id, keyNumber);
+  if (oldEntity) {
     const table =
       keyNumber !== undefined ? db[tableName][keyNumber] : db[tableName];
-    table[table.indexOf(getEntity)] = { ...entity };
+    table[table.indexOf(oldEntity)] = { ...entity };
   }
   return db.getEntityById(tableName, id, keyNumber);
 };
