@@ -124,4 +124,15 @@ db.createEntity = async (tableName, entity, keyNumber) => {
   return db.getEntityById(tableName, entity.id, keyNumber);
 };
 
+// UPDATE ENTITY
+db.updateEntity = async (tableName, id, entity, keyNumber) => {
+  const getEntity = await db.getEntityById(tableName, id, keyNumber);
+  if (getEntity) {
+    const table =
+      keyNumber !== undefined ? db[tableName][keyNumber] : db[tableName];
+    table[table.indexOf(getEntity)] = { ...entity };
+  }
+  return db.getEntityById(tableName, id, keyNumber);
+};
+
 module.exports = db;
