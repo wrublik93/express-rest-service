@@ -111,4 +111,17 @@ db.deleteEntity = async (tableName, id, keyNumber) => {
   return false;
 };
 
+// CREATE ENTITY
+db.createEntity = async (tableName, entity, keyNumber) => {
+  if (keyNumber === undefined) {
+    db[tableName].push(entity);
+  } else {
+    if (!Array.isArray(db[tableName][keyNumber])) {
+      db[tableName][keyNumber] = [];
+    }
+    db[tableName][keyNumber].push(entity);
+  }
+  return db.getEntityById(tableName, entity.id, keyNumber);
+};
+
 module.exports = db;
