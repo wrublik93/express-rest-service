@@ -91,3 +91,10 @@ db.getAllEntities = async (tableName, keyNumber) => {
     ? [...db[tableName][keyNumber]]
     : [...db[tableName]];
 };
+
+// GET ENTITY BY ID
+db.getEntityById = async (tableName, id, keyNumber) => {
+  const table =
+    keyNumber !== undefined ? db[tableName][keyNumber] : db[tableName];
+  return table.filter(item => id === item.id)[0];
+};
