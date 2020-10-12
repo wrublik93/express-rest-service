@@ -73,3 +73,21 @@ const db = {
     })
   );
 })();
+
+// ENTITIES
+
+// GET ALL ENTITIES
+db.getAllEntities = async (tableName, keyNumber) => {
+  if (tableName === 'tasks') {
+    if (keyNumber === undefined) {
+      return { ...db.tasks };
+    }
+    if (db[tableName][keyNumber] === undefined) {
+      db[tableName][keyNumber] = [];
+    }
+    return [...db[tableName][keyNumber]];
+  }
+  return keyNumber !== undefined
+    ? [...db[tableName][keyNumber]]
+    : [...db[tableName]];
+};
