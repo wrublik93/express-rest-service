@@ -14,9 +14,9 @@ const createUser = user => usersRepo.createUser(user);
 const updateUser = (id, user) => usersRepo.updateUser(id, user);
 
 // DELETE USER
-const deleteUser = id => {
-  usersRepo.deleteUser(id);
-  tasksService.unassignUser(id);
+const deleteUser = async id => {
+  await usersRepo.deleteUser(id);
+  await tasksService.unassignUser(id);
 };
 
 module.exports = {
