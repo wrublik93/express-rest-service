@@ -3,7 +3,7 @@ const { createLogger, transports, format } = require('winston');
 
 module.exports = createLogger({
   level: 'silly',
-  format: format.combine(format.colorize(), format.cli()),
+  /* format: format.combine(format.colorize(), format.cli()), */
   transports: [
     new transports.Console({
       format: format.combine(format.colorize(), format.cli())
