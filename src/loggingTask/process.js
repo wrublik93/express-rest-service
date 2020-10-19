@@ -9,7 +9,7 @@ const uncaughtException = err => {
   loggerEntry.on('finish', () => exit(1));
 };
 
-const rejection = err => {
+const unhandledRejection = err => {
   loggerEntry.log({
     message: `Rejection - ${err.message}`,
     level: 'error'
@@ -18,5 +18,5 @@ const rejection = err => {
 
 module.exports = {
   uncaughtException,
-  rejection
+  unhandledRejection
 };
