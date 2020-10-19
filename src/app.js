@@ -7,6 +7,11 @@ const userRouter = require('./resources/users/user.router');
 const taskRouter = require('./resources/tasks/task.router');
 const boardRouter = require('./resources/boards/board.router');
 const loggingHandler = require('./loggingTask/loggingHandler');
+const errorHandler = require('./loggingTask/errorHandler');
+const {
+  uncaughtException,
+  unhandledRejection
+} = require('./loggingTask/process');
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -27,5 +32,13 @@ app.use(loggingHandler);
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards', taskRouter);
+app.use(errorHandler);
+
+process
+  .on('unhandledRejection', unhandledRejection)
+  .on('uncaughtException', uncaughtException);
+
+// Promise.reject(Error('Oops!'));
+// throw Error('Oops!');
 
 module.exports = app;
