@@ -1,11 +1,18 @@
 module.exports = (
-  { url = '', params = {}, body = {}, method = '', status = '', message = '' },
+  {
+    url = '',
+    params = {},
+    body = {},
+    method = '',
+    statusCode = '',
+    message = ''
+  },
   isError = false
 ) => {
   const bodyLogging = `Body: ${JSON.stringify(body)}`;
   const paramsLogging = `Params: ${JSON.stringify(params)}`;
-  const log = isError
-    ? `Method: ${method}. Url: ${url}. Status: ${status}. Message: ${message}`
-    : '';
+  const log = `Method: ${method}. Url: ${url}${
+    isError ? ` Status code: ${statusCode}. Message: ${message}` : ''
+  }`;
   return `${log}. ${bodyLogging}. ${paramsLogging}.`;
 };
