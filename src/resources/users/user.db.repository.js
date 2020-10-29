@@ -2,7 +2,9 @@
 const User = require('./user.model');
 const NotFoundError = require('../../utils/errorClasses');
 
+// --------------//
 // GET ALL USERS
+// --------------//
 
 // memory
 /* const getAllUsers = async () => db.getAllEntities(TABLE); */
@@ -12,7 +14,9 @@ const getAllUsers = async () => {
   return User.find({});
 };
 
+// --------------//
 // GET USER BY ID
+// --------------//
 
 // memory
 /* const getUserById = async id => {
@@ -26,7 +30,9 @@ const getAllUsers = async () => {
 // mongo
 const getUserById = async id => User.findOne({ _id: id });
 
+// --------------//
 // CREATE USER
+// --------------//
 
 // memory
 /* const createUser = async user => db.createEntity(TABLE, user); */
@@ -34,10 +40,11 @@ const getUserById = async id => User.findOne({ _id: id });
 // mongo
 const createUser = async user => User.create(user);
 
+// --------------//
 // UPDATE USER
+// --------------//
 
 // memory
-
 /* const updateUser = async (id, user) => {
   const updatedUser = await db.updateEntity(TABLE, id, user);
   if (!updatedUser) {
@@ -47,13 +54,13 @@ const createUser = async user => User.create(user);
 }; */
 
 // mongo
-
 const updateUser = async (id, user) => User.findOneAndUpdate({ _id: id }, user);
 
+// --------------//
 // DELETE USER
+// --------------//
 
 // memory
-
 /* const deleteUser = async id => {
   const deleteUserId = await db.deleteEntity(TABLE, id);
   if (!deleteUserId) {
@@ -62,7 +69,6 @@ const updateUser = async (id, user) => User.findOneAndUpdate({ _id: id }, user);
 }; */
 
 // mongo
-
 const deleteUser = async id => {
   const deleteUserId = User.remove({ _id: id });
   if (!deleteUserId) {

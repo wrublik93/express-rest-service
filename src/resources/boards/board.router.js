@@ -42,7 +42,7 @@ router.route('/:id').put(
     const updatedBoard = await boardsService.updateBoard(
       id,
       new Board({
-        id,
+        _id: id,
         title,
         columns
       })
