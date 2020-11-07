@@ -25,17 +25,14 @@ router.route('/:boardId/tasks').post(
   handleRoute(async (req, res) => {
     const { boardId } = req.params;
     const { title, order, description, userId, columnId } = req.body;
-    const startTask = await tasksService.createTask(
+    const startTask = await tasksService.createTask(boardId, {
+      title,
+      order,
+      description,
+      userId,
       boardId,
-      new Task({
-        title,
-        order,
-        description,
-        userId,
-        boardId,
-        columnId
-      })
-    );
+      columnId
+    });
     res.status(200).send(Task.toResponse(startTask));
   })
 );
@@ -45,19 +42,15 @@ router.route('/:boardId/tasks/:taskId').put(
   handleRoute(async (req, res) => {
     const { boardId, taskId } = req.params;
     const { title, order, description, userId, columnId } = req.body;
-    const updatedTask = await tasksService.updateTask(
+    const updatedTask = await tasksService.updateTask(boardId, taskId, {
+      _id: taskId,
+      title,
+      order,
+      description,
+      userId,
       boardId,
-      taskId,
-      new Task({
-        _id: taskId,
-        title,
-        order,
-        description,
-        userId,
-        boardId,
-        columnId
-      })
-    );
+      columnId
+    });
     res.status(200).send(Task.toResponse(updatedTask));
   })
 );

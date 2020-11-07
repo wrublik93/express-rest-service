@@ -1,6 +1,7 @@
 /* const db = require('../../common/inMemoryDb'); */
 const User = require('./user.model');
 const NotFoundError = require('../../utils/errorClasses');
+const hashPassword = require('../../utils/hashPassword');
 
 // --------------//
 // GET ALL USERS
@@ -38,7 +39,10 @@ const getUserById = async id => User.findOne({ _id: id });
 /* const createUser = async user => db.createEntity(TABLE, user); */
 
 // mongo
-const createUser = async user => User.create(user);
+const createUser = async user => {
+  const hashedPassword = await hashPassword(user.password);
+  return User.create({ ...user, password: hashedPassword });
+};
 
 // --------------//
 // UPDATE USER
@@ -76,10 +80,13 @@ const deleteUser = async id => {
   }
 };
 
+const getUserByLogin = async login => User.findOne({ login });
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  getUserByLogin
 };

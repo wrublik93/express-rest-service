@@ -23,13 +23,11 @@ router.route('/:id').get(
 router.route('/').post(
   handleRoute(async (req, res) => {
     const { name, login, password } = req.body;
-    const startUser = await usersService.createUser(
-      new User({
-        name,
-        login,
-        password
-      })
-    );
+    const startUser = await usersService.createUser({
+      name,
+      login,
+      password
+    });
 
     res.status(200).send(User.toResponse(startUser));
   })
@@ -40,15 +38,12 @@ router.route('/:id').put(
   handleRoute(async (req, res) => {
     const { name, login, password } = req.body;
     const { id } = req.params;
-    const updatedUser = await usersService.updateUser(
-      id,
-      new User({
-        name,
-        login,
-        password,
-        _id: id
-      })
-    );
+    const updatedUser = await usersService.updateUser(id, {
+      name,
+      login,
+      password,
+      _id: id
+    });
 
     res.status(200).send(User.toResponse(updatedUser));
   })
